@@ -1,0 +1,37 @@
+The question states we construct a string of lenght N alphabetically. This means me will be adding characters like "a", then "b", then "c" and so on.
+The characters are also only added to the start or the end of the string in a valid sequence.
+
+Try thinking about the problem in reverse, the last character added would be either at the start or at the end.
+If we remove the last character, the 2nd last element would now be either at the start or the end and this problem continues.
+
+Trying this technique on test 5:-
+(i)gecabdfh  ->  gecabdf(h) ->  (g)ecabdf  -> .. and so on.
+
+In cpp, we can get the ascii value of a character directly by typecasting it to int.
+In python you can do so using the ord() function.
+
+We will also utilize Double Ended Queues to simplify our implementation, named deque in both cpp and python.
+Deques allow us O(1) additions and removals to both the start and the end of an array
+Also note the ascii value of "a" is 96, "b" is 97 and so on.
+
+from collections import deque
+def solve():
+    a = deque(str(input()))
+    n = len(a)
+    while(len(a)>0):
+        if(ord(a[0]) == 96+n):
+            a.popleft()
+            n-=1
+        elif(ord(a[-1])==96+n):
+            a.pop()
+            n-=1
+        else:
+            print("NO")
+            return
+    print("YES")
+
+    
+for _ in range(int(input())):
+    solve()
+
+
